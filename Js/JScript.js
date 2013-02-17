@@ -30,8 +30,15 @@ jQuery.getJSON("Js/cooktimes.json", function(data) {
     });
 });
 function changeIt(name) {
-    //alert(name);
+
     $.mobile.changePage("#sublistpage", { transition: "slideup" });
+
+    // Find the track_id of the workout they are viewing
+    //var key = $(this).attr(name);
+    alert(name);
+    // Update the Track Info page header to the track_id
+    $("#sublistpage div[data-role=header] h1").text(name);
+    
     jQuery.getJSON("Js/cooktimes.json", function(data) {
 
         $('#subcategorieslist li').remove();
