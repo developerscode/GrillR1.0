@@ -12,7 +12,7 @@ var minutes = 0;
 var minutessplit = "";
 $('#startPage').live('pageshow', function() {
 
-jQuery.getJSON("Js/cooktimes.json", function(data) {
+    jQuery.getJSON("Js/cooktimes.json", function(data) {
 
         $('#categorieslist li').remove();
 
@@ -35,16 +35,16 @@ function changeIt(name) {
 
     // Find the track_id of the workout they are viewing
     //var key = $(this).attr(name);
-    alert(name);
+    //alert(name);
     // Update the Track Info page header to the track_id
     $("#sublistpage div[data-role=header] h1").text(name);
-    
+
     jQuery.getJSON("Js/cooktimes.json", function(data) {
 
         $('#subcategorieslist li').remove();
         // alert("Enter2");
         $.each(data, function(index, element) {
-        if (element.category == name) {
+            if (element.category == name) {
                 $('#subcategorieslist').append('<li><span style="font-size:Medium; font-family:Verdana; color:Black;">' + element.type + '</span></li>');
             }
         });
@@ -58,8 +58,8 @@ $('#subcategorieslist li').live('vclick', function() {
 
     $.mobile.changePage("#categorydetailpage", { transition: "slideup" });
     jQuery.getJSON("Js/cooktimes.json", function(data) {
-
-       // $('#subcategorieslist li').remove();
+        $("#categorydetailpage div[data-role=header] h1").text(selectedcategory);
+        // $('#subcategorieslist li').remove();
 
         // alert("Enter3");
 
@@ -166,8 +166,8 @@ function display() {
 
             minutes = [(minutessplit > 0) ? Math.floor(minutessplit) : Math.ceil(minutessplit)];
 
-            //            minutessplit = minutes.split('.');
-            //alert(minutes);
+            //minutessplit = minutes.split('.');
+            
             seconds = (minutes * 60) - seconds;
         }
         //seconds = 100;
@@ -187,8 +187,10 @@ function display() {
 }
 function gettime() {
     // minutes = 0;
-
-    // alert(seconds);
+    //alert(minutes);
+    //alert(seconds);
+    var minlength = minutes;
+    //alert(minlength.length);
     if (milisec <= 0) {
         milisec = 9;
         seconds -= 1;
@@ -207,9 +209,9 @@ function gettime() {
     else
 
         milisec -= 1
-    document.getElementById('d2').value = minutes + ":" + seconds + " : " + milisec;
+    document.getElementById('d2').value = minutes + ":" + seconds;
     if (minutes == 0 && seconds == 0 && milisec == 0) {
-        //alert("Time Out");
+       // alert("Time Out");
         playsound();
     }
     else {
@@ -217,7 +219,7 @@ function gettime() {
     }
 }
 function playsound() {
-    //alert("play");
+    alert("play");
     var snd = new Audio("chime.wav"); // buffers automatically when created
     snd.play();
 
